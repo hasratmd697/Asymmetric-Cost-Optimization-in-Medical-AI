@@ -2,7 +2,7 @@
 
 Automated classification of chest X-ray images into 20 thoracic pathologies (e.g., Atelectasis, Cardiomegaly, Effusion, Pneumothorax). This repository implements a robust deep learning pipeline optimized for **asymmetric misdiagnosis costs**, achieving a leaderboard score of **-4.34**.
 
-## 📌 Problem & Clinical Context
+##  Problem & Clinical Context
 In clinical AI, misdiagnoses carry asymmetric consequences. A missed pathology (False Negative) is significantly more dangerous to patient outcomes than a false alarm (False Positive). 
 
 To model this clinical reality, the model was evaluated under a strict asymmetric score $S_c$ per class:
@@ -11,7 +11,7 @@ Where a **False Negative is penalised 5 times more heavily** than a False Positi
 
 ---
 
-## 🛠️ Key Methodologies & Tech Stack
+##  Key Methodologies & Tech Stack
 * **Deep Learning Framework:** PyTorch & Torchvision
 * **Model Architecture:** **DenseNet-121** fine-tuned with a custom classification head:
   `BatchNorm1d ➜ Dropout(0.4) ➜ Linear(1024 ➜ 512) ➜ ReLU ➜ BatchNorm1d ➜ Dropout(0.2) ➜ Linear(512 ➜ 20)`.
@@ -32,7 +32,7 @@ Directly training a network on highly asymmetric cost functions degrades represe
 * **TTA Pipeline:** Performed 5 rounds of stochastic TTA (horizontal flips + minor rotations) per fold.
 * **Forward Passes:** Each test prediction averaged probabilities across $3\text{ models} \times (1\text{ base} + 5\text{ TTA}) = 18$ forward passes to smooth decision boundaries.
 
-### 4. Post-Hoc Cost-Sensitive Exponent Scaling (The Math 🧮)
+### 4. Post-Hoc Cost-Sensitive Exponent Scaling (The Math)
 For a single sample, maximizing the expected clinical score simplifies to selecting the class $c$ maximizing:
 $$\text{Adjusted Prob}(c) = P(c) \cdot \left(\frac{1}{N_c + 1}\right)^\alpha$$
 Where $N_c$ is the training sample count for class $c$, and $\alpha \in [0.0, 1.0]$ is a validation-tuned exponent:
@@ -42,7 +42,7 @@ Grid-searching $\alpha$ on our validation folds yielded the optimal tradeoff, bo
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 ```bash
 .
 ├── train.py                  # Custom training script with PyTorch pipeline
@@ -54,7 +54,7 @@ Grid-searching $\alpha$ on our validation folds yielded the optimal tradeoff, bo
     └── images/
 ```
 
-## 🚀 Setup & Execution
+##  Setup & Execution
 1. **Clone the Repository:**
    ```bash
    git clone https://github.com/hasratmd697/Asymmetric-Cost-Optimization-in-Medical-AI.git
