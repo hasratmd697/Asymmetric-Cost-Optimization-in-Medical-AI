@@ -1,0 +1,21 @@
+# Academic submission files (anonymization/privacy)
+24f1002299_code.md
+24f1002299_report.md
+kaggle_notebook_cells.md
+
+# Large dataset files and submission predictions
+data/
+images/
+*.csv
+
+# Model Checkpoints / Weights
+*.pth
+*.pt
+
+# Python caches and Jupyter Notebook checkpoints
+__pycache__/
+*.py[cod]
+*$py.class
+.ipynb_checkpoints/
+.DS_Store
+Thumbs.db
